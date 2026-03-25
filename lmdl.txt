@@ -122,3 +122,68 @@ def plot_accuracy(history, miny=None):
     plt.show()
 
 plot_accuracy(history)
+
+
+
+
+
+
+data(iris)
+
+install.packages("plot3D")
+install.packages("lattice")
+
+library(plot3D)
+library(lattice)
+
+species_col <- as.numeric(iris$Species)
+
+scatter3D(
+  x = iris$Sepal.Length,
+  y = iris$Sepal.Width,
+  z = iris$Petal.Length,
+  colvar = species_col,
+  col = c("red", "green", "blue"),
+  main = "3D Scatter Plot (Iris)",
+  xlab = "Sepal Length",
+  ylab = "Sepal Width",
+  zlab = "Petal Length"
+)
+
+cloud(
+  Petal.Length ~ Sepal.Length * Sepal.Width,
+  data = iris,
+  groups = Species,
+  main = "3D Cloud Plot (Iris)",
+  auto.key = TRUE
+)
+
+xyplot(
+  Petal.Length ~ Sepal.Length | Species,
+  data = iris,
+  main = "xyplot of Petal vs Sepal Length",
+  layout = c(3, 1)
+)
+
+
+
+
+
+data(iris)
+
+install.packages("corrplot")
+
+library(corrplot)
+
+num_data <- iris[, 1:4]
+
+cor_matrix <- cor(num_data)
+
+corrplot(
+  cor_matrix,
+  method = "color",
+  addCoef.col = "black",
+  col = colorRampPalette(c("blue", "white", "red"))(200),
+  title = "Correlogram of Iris Dataset",
+  mar = c(0, 0, 1, 0)
+)
